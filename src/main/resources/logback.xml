@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender
+    name="STDOUT"
+    class="ch.qos.logback.core.ConsoleAppender"
+  >
+    <encoder>
+      <!--<layout class="com.solera.global.arch.generic.logging.layout.JsonLogbackLayout"/>-->
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+    </encoder>
+  </appender>
+
+  <logger
+    name="console"
+    level="DEBUG"/>
+
+  <root level="error">
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>
