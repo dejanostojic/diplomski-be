@@ -39,6 +39,7 @@ public interface CompetitionMapper {
     @Named("toFeeDtoListWithoutCompetitionFees")
     @Mapping(target = "competition.routes", ignore = true)
     @Mapping(target = "competition.registrationFees", ignore = true)
+    @Mapping(target = "competition.registrations", ignore = true)
     @Mapping(source = "competition.id", target = "id.competitionId")
     @Mapping(source = "ord", target = "id.ord")
     RegistrationFeeDto mapWithouData(RegistrationFee source);
@@ -50,8 +51,6 @@ public interface CompetitionMapper {
     @Named("toFeeListWithoutCompetitionFees")
     @Mapping(target = "competition.routes", ignore = true)
     @Mapping(target = "competition.registrationFees", ignore = true)
-//    @Mapping(source = "id.competitionId", target = "competition.id")
-//    @Mapping(source = "id.ord", target = "ord")
     RegistrationFee toFeeListWithoutCompetitionFees(RegistrationFeeDto source);
 
     // PREVENT CIRCULAR MAPPING OF Routes
@@ -61,6 +60,7 @@ public interface CompetitionMapper {
     @Named("toRouteDtoListWithoutCompetitionRoutes")
     @Mapping(target = "competition.routes", ignore = true)
     @Mapping(target = "competition.registrationFees", ignore = true)
+    @Mapping(target = "competition.registrations", ignore = true)
     @Mapping(source = "competition.id", target = "id.competitionId")
     @Mapping(source = "ord", target = "id.ord")
     RouteDto mapWithouData(Route source);
@@ -72,13 +72,10 @@ public interface CompetitionMapper {
     @Named("toRouteListWithoutCompetitionRoutes")
     @Mapping(target = "competition.routes", ignore = true)
     @Mapping(target = "competition.registrationFees", ignore = true)
-//    @Mapping(source = "id.competition", target = "competition")
-//    @Mapping(source = "id.ord", target = "ord")
+    @Mapping(target = "competition.registrations", ignore = true)
     Route toRouteListWithoutCompetitionRoutes(RouteDto source);
 
 
-    //    @Mapping(source = "competition", target = "competition")
-//    @Mapping(source = "ord", target = "ord")
     Route fromDto(RouteDto routeDto);
 
 
@@ -86,23 +83,43 @@ public interface CompetitionMapper {
     @Mapping(source = "ord", target = "id.ord")
     RouteDto toDto(Route route);
 
-    //    @Mapping(source = "id.competition", target = "competition")
-//    @Mapping(source = "id.ord", target = "ord")
     RegistrationFee fromDto(RegistrationFeeDto registrationFeeDto);
 
     @Mapping(source = "competition.id", target = "id.competitionId")
     @Mapping(source = "ord", target = "id.ord")
     RegistrationFeeDto toDto(RegistrationFee registrationFee);
 
-    //    @Mapping(source = "id.competitionId", target = "competition.id")
-//    @Mapping(source = "id.startNumber", target = "startNumber")
     Registration fromDto(RegistrationDto registrationDto);
 
-        @Mapping(source = "competition.id", target = "id.competitionId")
+    @Mapping(source = "competition.id", target = "id.competitionId")
     @Mapping(source = "climber.id", target = "id.climberId")
     RegistrationDto toDto(Registration registration);
 
-    public List<Registration> toRegistrations(List<RegistrationDto> loadList);
+//    public List<Registration> toRegistrations(List<RegistrationDto> loadList);
+
+
+    // prevent circular mapping of registrations
+    // PREVENT CIRCULAR MAPPING OF FEES
+    @IterableMapping(qualifiedByName="toRegistrationDtoListWithoutRegistrations")
+    List<RegistrationDto> toRegistrationDtos(List<Registration> registration);
+
+    @Named("toRegistrationDtoListWithoutRegistrations")
+    @Mapping(target = "competition.routes", ignore = true)
+    @Mapping(target = "competition.registrationFees", ignore = true)
+    @Mapping(target = "competition.registrations", ignore = true)
+    @Mapping(source = "competition.id", target = "id.competitionId")
+    @Mapping(source = "climber.id", target = "id.climberId")
+    RegistrationDto mapWithouData(Registration source);
+
+
+    @IterableMapping(qualifiedByName="toRegistrationListWithoutRegistrations")
+    List<Registration> toRegistration(List<RegistrationDto> registrationDtos);
+
+    @Named("toRegistrationListWithoutRegistrations")
+    @Mapping(target = "competition.routes", ignore = true)
+    @Mapping(target = "competition.registrationFees", ignore = true)
+    @Mapping(target = "competition.registrations", ignore = true)
+    Registration toRegistrationListWithoutCompetitionFees(RegistrationDto source);
 
     @AfterMapping
     default void afterCompetitionMapping(@MappingTarget Competition competition, CompetitionDto competitionDto) {

@@ -2,6 +2,7 @@ package com.dostojic.climbers.repository.spring.data.adapter;
 
 import com.dostojic.climbers.domain.Climber;
 import com.dostojic.climbers.domain.Competition;
+import com.dostojic.climbers.domain.Registration;
 import com.dostojic.climbers.domain.RegistrationFee;
 import com.dostojic.climbers.domain.valueobject.ClimberSearchCriteria;
 import com.dostojic.climbers.repository.ClimberRepository;
@@ -54,6 +55,11 @@ class CompetitionRepositoryTest /*extends DataSourceBasedDBTestCase */{
         assertNotNull(fees.get(0).getCompetition(), "Competitions must not be null");
         assertEquals(37, fees.get(0).getCompetition().getId(), "Competition id must match");
         assertNotNull(c.getRoutes());
+
+        List<Registration> registrations = c.getRegistrations();
+        assertEquals(1, registrations.size(), "Registration must be loaded");
+        assertEquals(1, registrations.get(0).getClimber().getId(), "Registered climber must be loaded");
+
 
     }
 

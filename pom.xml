@@ -15,11 +15,6 @@
     </parent>
 
         <dependencies>
-            <dependency>
-                <groupId>${project.groupId}</groupId>
-                <artifactId>climbers-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <!--Spring deps start -->
             <dependency>

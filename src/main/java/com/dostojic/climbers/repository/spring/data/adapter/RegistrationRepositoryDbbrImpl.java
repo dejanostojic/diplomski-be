@@ -51,7 +51,8 @@ public class RegistrationRepositoryDbbrImpl implements RegistrationRepository {
 
     @Override
     public List<Registration> findByCompetitionId(Integer id)  {
-        return CompetitionMapper.INSTANCE.toRegistrations(jpaRegistrationRepository.findRegistrationsByIdCompetitionId( id));
+        throw new RuntimeException("NOT USED ANYMORE!");
+//        return CompetitionMapper.INSTANCE.toRegistrations(jpaRegistrationRepository.findRegistrationsByIdCompetitionId( id));
     }
 
 }

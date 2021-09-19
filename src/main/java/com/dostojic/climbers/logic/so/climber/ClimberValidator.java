@@ -7,12 +7,13 @@ package com.dostojic.climbers.logic.so.climber;
 
 import com.dostojic.climbers.domain.Climber;
 import com.dostojic.climbers.exception.ClimbersValidationException;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Dejan.Ostojic
  */
-// TODO: Change this to DTO and use DTO in controller
+@Component
 public class ClimberValidator {
     public void validate(Climber climber) {
         boolean isValid = true;

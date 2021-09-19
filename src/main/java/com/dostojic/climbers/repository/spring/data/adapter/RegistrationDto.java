@@ -27,8 +27,8 @@ public class RegistrationDto {
     private CompetitionDto competition;
 
     @ManyToOne
-    @MapsId("climberId")
-    @JoinColumn(name = "climber_id", nullable = false, updatable = false)
+//    @MapsId("climberId")
+    @JoinColumn(name = "climber_id", insertable = false, nullable = false, updatable = false)
     private ClimberDto climber;
 
     @Column
@@ -110,13 +110,20 @@ public class RegistrationDto {
     public void setRegistrationFee(RegistrationFeeDto registrationFee) {
         this.registrationFee = registrationFee;
     }
-//    public CompetitionDto getCompetition() {
-//        return competition;
-//    }
-//
-//    public void setCompetition(CompetitionDto competition) {
-//        this.competition = competition;
-//    }
 
+    public CompetitionDto getCompetition() {
+        return competition;
+    }
 
+    public void setCompetition(CompetitionDto competition) {
+        this.competition = competition;
+    }
+
+    public ClimberDto getClimber() {
+        return climber;
+    }
+
+    public void setClimber(ClimberDto climber) {
+        this.climber = climber;
+    }
 }

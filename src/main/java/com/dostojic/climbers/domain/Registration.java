@@ -132,7 +132,7 @@ public class Registration implements Serializable {
 
     @Override
     public String toString() {
-        return "Registration{" + "competition=" + competition + ", climber=" + climber + ", startNumber=" + startNumber + ", totalOrd=" + totalOrd + ", paid=" + paid + ", createdDate=" + createdDate + ", paidDate=" + paidDate + ", registrationFee=" + registrationFee + ", climbedRoutes=" + climbedRoutes + '}';
+        return "Registration{climber=" + climber + ", startNumber=" + startNumber + ", totalOrd=" + totalOrd + ", paid=" + paid + ", createdDate=" + createdDate + ", paidDate=" + paidDate + ", registrationFee=" + registrationFee + ", climbedRoutes=" + climbedRoutes + '}';
     }
 
 }
