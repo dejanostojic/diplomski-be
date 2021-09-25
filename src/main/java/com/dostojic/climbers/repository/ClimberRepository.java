@@ -7,14 +7,12 @@ package com.dostojic.climbers.repository;
 
 import com.dostojic.climbers.domain.Climber;
 import com.dostojic.climbers.domain.valueobject.ClimberSearchCriteria;
-//import com.dostojic.climbers.domain.valueobject.Page;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
 
 /**
  *
- * @author planina
+ * @author Dejan.Ostojic
  */
 public interface ClimberRepository {
 
@@ -28,5 +26,5 @@ public interface ClimberRepository {
 
     Climber findById(Integer climber);
 
-    public Climber insert(Climber climber) ;
+    Climber insert(Climber climber) ;
 }

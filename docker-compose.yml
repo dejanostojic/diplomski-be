@@ -15,7 +15,8 @@ services:
            timeout: 20s
            retries: 10
   backendserver:
-    image: 'dejanostojic/diplomski-be:init.test.0.0.1'
+    build: .
+    #image: 'dejanostojic/diplomski-be:init.test.0.0.1'
     environment:
     - SPRING_DATASOURCE_URL=jdbc:mysql://docker-mysql:3306/ps_climbers_docker?useLegacyDatetimeCode=false&serverTimezone=UTC
     - MYSQL_USER=root
@@ -24,14 +25,15 @@ services:
     - spring.jpa.hibernate.ddl-auto=none
     - spring.datasource.initialization-mode=always
     ports:
-    - "8081:8081"
+    - "9081:8081"
     links:
     - "docker-mysql"
     depends_on:
     - "docker-mysql"
     restart: always
   frontend:
-    image: 'dejanostojic/diplomski-fe:init.test.0.0.5'
+    #build: ../diplomski-fe/
+    image: 'dejanostojic/diplomski-fe:init.local.0.0.5'
     links:
     - "backendserver"
     depends_on:

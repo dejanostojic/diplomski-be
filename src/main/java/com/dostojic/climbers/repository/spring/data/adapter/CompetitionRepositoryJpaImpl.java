@@ -34,7 +34,7 @@ import java.util.Optional;
  * @author Dejan.Ostojic
  */
 @Component // TODO REFACTOR TO JPA IMPL
-public class CompetitionRepositoryDbbrImpl implements CompetitionRepository {
+public class CompetitionRepositoryJpaImpl implements CompetitionRepository {
 
     @Autowired
     JpaCompetitionRepository repo;
@@ -43,7 +43,7 @@ public class CompetitionRepositoryDbbrImpl implements CompetitionRepository {
 //    DbBroker<RegistrationFeeDto, RegistrationFeeCompositeId> registrationFeeDbbr;
 //    DbBroker<RegistrationDto, RegistrationCompositeId> registrationDbbr;
 
-    public CompetitionRepositoryDbbrImpl() {
+    public CompetitionRepositoryJpaImpl() {
     }
 
     private Predicate getPredicate(CompetitionSearchCriteria searchCriteria) {

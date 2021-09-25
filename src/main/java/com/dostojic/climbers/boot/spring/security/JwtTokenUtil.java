@@ -4,6 +4,7 @@ package com.dostojic.climbers.boot.spring.security;
 import com.dostojic.climbers.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -11,6 +12,7 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 //import org.slf4j.Logger;
 //import org.slf4j.event.Level;
+import java.util.Base64;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -22,19 +24,17 @@ import static java.lang.String.format;
 @Component
 public class JwtTokenUtil {
 
-    private final String jwtSecret = "zdtlD3JK56m6wTTgsNFhqzjqP";
-    private final String jwtIssuer = "example.io";
+    private final String jwtSecret ="zdtlD3JK56m6wTTgsNFhqzjqP";
+    private final String jwtIssuer = "diplomski.x3m.link";
 
-//    private final Logger logger;
-//
-//    public JwtTokenUtil(Logger logger) {
-//        this.logger = logger;
-//    }
 
     public String generateAccessToken(User user) {
         return "Bearer " + Jwts.builder()
                 .setSubject(format("%s,%s", user.getId(), user.getUsername()))
                 .setIssuer(jwtIssuer)
+                .claim("userId", user.getId())
+                .claim("firstName", user.getFirstName())
+                .claim("lastName", user.getLastName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
@@ -70,7 +70,8 @@ public class JwtTokenUtil {
 
     public boolean validate(String token) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+            Jws<Claims> c =  Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+            System.out.println("claims: " + c.toString());
             return true;
         } catch (SignatureException ex) {
             Logger.getLogger(JwtTokenUtil.class.getName()).log(Level.WARNING,"Invalid JWT signature - " + ex.getMessage());

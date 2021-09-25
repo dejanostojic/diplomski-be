@@ -7,20 +7,17 @@ package com.dostojic.climbers.logic.so.competition;
 
 import com.dostojic.climbers.domain.Competition;
 import com.dostojic.climbers.domain.valueobject.CompetitionSearchCriteria;
-import com.dostojic.climbers.logic.TransactionManager;
-import com.dostojic.climbers.logic.so.template.GeneralReportingSO;
+import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.CompetitionRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  *
  * @author Dejan.Ostojic
  */
 @Service
-public class SearchCompetitions extends GeneralReportingSO<CompetitionSearchCriteria, Page<Competition>>{
+public class SearchCompetitions extends GeneralSO<CompetitionSearchCriteria, Page<Competition>> {
 
      private final CompetitionRepository competitionRepository;
 

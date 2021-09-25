@@ -39,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Value("${springdoc.api-docs.path}")
     private String restApiDocPath;
-    @Value("${springfox.documentation.swagger.v2.path}")
+//    @Value("${springfox.documentation.swagger.v3.path}")
+    @Value("/v3/api-docs")
     private String swaggerPath;
 
     public SecurityConfig(UserRepository userRepo,
@@ -93,7 +94,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          String[] AUTH_WHITELIST = {
                 "/swagger-resources/**",
                 "/swagger-ui.html",
-                "/v2/api-docs",
+                "/v3/api-docs",
                 "/webjars/**",
                  "/configuration/**"
         };
@@ -110,10 +111,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Our public endpoints
                 .antMatchers("/api/public/**").permitAll()
                 .antMatchers("/api/public/**/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/author/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/author/search").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/book/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/book/search").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated();
 

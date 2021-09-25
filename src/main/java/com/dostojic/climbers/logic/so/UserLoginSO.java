@@ -8,8 +8,7 @@ package com.dostojic.climbers.logic.so;
 import com.dostojic.climbers.domain.User;
 import com.dostojic.climbers.domain.valueobject.LoginCredentials;
 import com.dostojic.climbers.exception.LoginException;
-import com.dostojic.climbers.logic.TransactionManager;
-import com.dostojic.climbers.logic.so.template.GeneralReportingSO;
+import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Dejan.Ostojic
  */
 @Service
-public class UserLoginSO extends GeneralReportingSO<LoginCredentials, User>{
+public class UserLoginSO extends GeneralSO<LoginCredentials, User> {
     
     private final UserRepository userRepository;
     

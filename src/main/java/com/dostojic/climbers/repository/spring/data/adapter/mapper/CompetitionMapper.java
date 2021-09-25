@@ -123,7 +123,7 @@ public interface CompetitionMapper {
 
     @AfterMapping
     default void afterCompetitionMapping(@MappingTarget Competition competition, CompetitionDto competitionDto) {
-       /* if (competition.getRegistrationFees() != null) {
+        if (competition.getRegistrationFees() != null) {
             competition.getRegistrationFees().forEach(registrationFee
                     -> registrationFee.setCompetition(competition));
         }
@@ -134,7 +134,7 @@ public interface CompetitionMapper {
         if (competition.getRegistrations() != null) {
             competition.getRegistrations().forEach(registration
                     -> registration.setCompetition(competition));
-        }*/
+        }
     }
 
     @AfterMapping

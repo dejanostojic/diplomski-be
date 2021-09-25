@@ -8,16 +8,14 @@ package com.dostojic.climbers.logic.so.competition;
 import com.dostojic.climbers.domain.Competition;
 import com.dostojic.climbers.domain.RegistrationFee;
 import com.dostojic.climbers.domain.Route;
+import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.CompetitionRepository;
-import com.dostojic.climbers.logic.TransactionManager;
-import com.dostojic.climbers.logic.so.template.GeneralReportingSO;
 import com.dostojic.climbers.repository.RegistrationFeeRepository;
 import com.dostojic.climbers.repository.RegistrationRepository;
 import com.dostojic.climbers.repository.RouteRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -25,7 +23,7 @@ import java.util.stream.Collectors;
  * @author Dejan.Ostojic
  */
 @Service
-public class FindCompetition extends GeneralReportingSO<Integer, Competition>{
+public class FindCompetition extends GeneralSO<Integer, Competition> {
 
     private final CompetitionRepository competitionRepository;
     private final RouteRepository routeRepository;

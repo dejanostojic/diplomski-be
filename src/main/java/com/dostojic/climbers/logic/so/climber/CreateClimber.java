@@ -6,34 +6,41 @@
 package com.dostojic.climbers.logic.so.climber;
 
 import com.dostojic.climbers.domain.Climber;
+import com.dostojic.climbers.logic.so.climber.validator.ClimberValidator;
+import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.ClimberRepository;
-import com.dostojic.climbers.logic.so.template.GeneralUpdateSO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author Dejan.Ostojic
  */
 @Service
-public class CreateClimber extends GeneralUpdateSO<Climber, Climber> {
+public class CreateClimber extends GeneralSO<Climber, Climber> {
 
-    private final ClimberRepository climberRepository;
-    private final ClimberValidator climberValidator;
+  private ClimberRepository climberRepository;
+  private ClimberValidator climberValidator;
 
-    public CreateClimber(ClimberRepository climberRepository, ClimberValidator climberValidator) {
-        this.climberRepository = climberRepository;
-        this.climberValidator = climberValidator;
-    }
+  @Autowired
+  public void setClimberRepository(ClimberRepository climberRepository) {
+    this.climberRepository = climberRepository;
+  }
 
-    @Override
-    protected void checkPrecondition(Climber climber) {
-        climberValidator .validate(climber);
-    }
+  @Autowired
+  public void setClimberValidator(
+      ClimberValidator climberValidator) {
+    this.climberValidator = climberValidator;
+  }
 
-    @Override
-    public Climber executeOperation(Climber climber) {
-        System.out.println("DEBUG: Inserting climber: " + climber);
-        return climberRepository.insert(climber);
-    }
+  @Override
+  protected void checkPrecondition(Climber climber) {
+    climberValidator.validate(climber);
+  }
+
+  @Override
+  public Climber executeOperation(Climber climber) {
+    System.out.println("DEBUG: Inserting climber: " + climber);
+    return climberRepository.insert(climber);
+  }
 
 }

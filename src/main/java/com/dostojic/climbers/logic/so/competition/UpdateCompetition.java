@@ -9,9 +9,8 @@ import com.dostojic.climbers.domain.Competition;
 import com.dostojic.climbers.domain.Registration;
 import com.dostojic.climbers.domain.RegistrationFee;
 import com.dostojic.climbers.domain.Route;
+import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.CompetitionRepository;
-import com.dostojic.climbers.logic.TransactionManager;
-import com.dostojic.climbers.logic.so.template.GeneralUpdateSO;
 import com.dostojic.climbers.repository.RegistrationFeeRepository;
 import com.dostojic.climbers.repository.RegistrationRepository;
 import com.dostojic.climbers.repository.RouteRepository;
@@ -27,7 +26,7 @@ import java.util.stream.Collectors;
  * @author Dejan.Ostojic
  */
 @Service
-public class UpdateCompetition extends GeneralUpdateSO<Competition, Competition> {
+public class UpdateCompetition extends GeneralSO<Competition, Competition> {
 
     private final CompetitionRepository competitionRepository;
     private final RouteRepository routeRepository;
@@ -64,7 +63,7 @@ public class UpdateCompetition extends GeneralUpdateSO<Competition, Competition>
 
         handleRoutes(fromDb, submittedCompetition);
         handleRegistrationFees(fromDb, submittedCompetition);
-//        handleRegistrations(submittedCompetition);
+        handleRegistrations(fromDb, submittedCompetition);
 
         System.out.println(fromDb.toString());
 
@@ -99,9 +98,6 @@ public class UpdateCompetition extends GeneralUpdateSO<Competition, Competition>
             }
         });
     }
-    private List<Route> findUpdatedRoutes(List<Route> prevRoutes, List<Route> submittedRoutes) {
-        return submittedRoutes.stream().filter(submitted -> prevRoutes.contains(submitted)).collect(Collectors.toList());
-    }
 
     private List<Route> findCreatedRoutes(List<Route> prevRoutes, List<Route> submittedRoutes) {
         return submittedRoutes.stream().filter(submitted -> !prevRoutes.contains(submitted)).collect(Collectors.toList());
@@ -113,7 +109,6 @@ public class UpdateCompetition extends GeneralUpdateSO<Competition, Competition>
         List<RegistrationFee> submittedFees = submitterdCompetition.getRegistrationFees();
 
         List<RegistrationFee> deletedRoutes = findDeletedRegistrationFees(prevFees, submittedFees);
-//        List<RegistrationFee> updatedRoutes = findUpdatedRegistrationFees(prevFees, submittedFees);
         List<RegistrationFee> createdRoutes = findCreatedRegistrationFees(prevFees, submittedFees);
 
         prevFees.removeAll(deletedRoutes);
@@ -123,9 +118,33 @@ public class UpdateCompetition extends GeneralUpdateSO<Competition, Competition>
 
     }
 
+    private void handleRegistrations(Competition prevComp, Competition submitterdCompetition) {
+        List<Registration> prevRegs = prevComp.getRegistrations();
+        List<Registration> submittedRegs = submitterdCompetition.getRegistrations();
+
+        List<Registration> deletedRoutes = findDeletedRegistrations(prevRegs, submittedRegs);
+//        List<Registration> updatedRoutes = findUpdatedRegistrationFees(prevFees, submittedFees);
+        List<Registration> createdRoutes = findCreatedRegistrations(prevRegs, submittedRegs);
+
+        prevRegs.removeAll(deletedRoutes);
+        updateRegs(prevRegs, submittedRegs);
+
+        prevRegs.addAll(createdRoutes);
+
+    }
+
     private void updateFees(List<RegistrationFee> prevFees, List<RegistrationFee> submittedFees){
         prevFees.stream().forEach(prev -> {
             Optional<RegistrationFee> submitted = submittedFees.stream().filter(newRoute -> prev.equals(newRoute)).findFirst();
+            if (submitted.isPresent()) {
+                CompetitionMapper.INSTANCE.update(submitted.get(), prev);
+            }
+        });
+    }
+
+    private void updateRegs(List<Registration> prevRegs, List<Registration> submittedRegs){
+        prevRegs.stream().forEach(prev -> {
+            Optional<Registration> submitted = submittedRegs.stream().filter(newReg -> prev.equals(newReg)).findFirst();
             if (submitted.isPresent()) {
                 CompetitionMapper.INSTANCE.update(submitted.get(), prev);
             }

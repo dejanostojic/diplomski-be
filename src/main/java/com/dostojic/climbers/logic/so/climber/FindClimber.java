@@ -6,20 +6,16 @@
 package com.dostojic.climbers.logic.so.climber;
 
 import com.dostojic.climbers.domain.Climber;
+import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.ClimberRepository;
-import com.dostojic.climbers.logic.TransactionManager;
-import com.dostojic.climbers.logic.so.template.GeneralReportingSO;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  *
  * @author Dejan.Ostojic
  */
 @Service
-public class FindClimber extends GeneralReportingSO<Integer, Climber>{
+public class FindClimber extends GeneralSO<Integer, Climber> {
 
     private final ClimberRepository climberRepository;
     

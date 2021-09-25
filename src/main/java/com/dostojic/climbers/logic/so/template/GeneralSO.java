@@ -5,10 +5,23 @@
  */
 package com.dostojic.climbers.logic.so.template;
 
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  *
  * @author Dejan.Ostojic
  */
-public interface GeneralSO<DomainObjectIn, DomainObjectOut> {
-    DomainObjectOut execute(DomainObjectIn domainObject) throws Exception;
+public abstract class GeneralSO<DomainObjectIn, DomainObjectOut> {
+
+
+    @Transactional
+    public DomainObjectOut execute(DomainObjectIn domainObject) {
+        // todo: check transactional works in superclass
+        checkPrecondition(domainObject);
+        return executeOperation(domainObject);
+    }
+
+    protected void checkPrecondition(DomainObjectIn domainObject){};
+
+    protected abstract DomainObjectOut executeOperation(DomainObjectIn domainObject);
 }

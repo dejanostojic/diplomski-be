@@ -23,6 +23,6 @@ public interface CompetitionRepository {
     
     Competition update(Competition competition);
 
-    public Competition findById(Integer id);
+    Competition findById(Integer id);
 
 }

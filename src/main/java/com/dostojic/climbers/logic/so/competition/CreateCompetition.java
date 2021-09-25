@@ -9,9 +9,8 @@ import com.dostojic.climbers.domain.Competition;
 import com.dostojic.climbers.domain.Registration;
 import com.dostojic.climbers.domain.RegistrationFee;
 import com.dostojic.climbers.domain.Route;
+import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.CompetitionRepository;
-import com.dostojic.climbers.logic.TransactionManager;
-import com.dostojic.climbers.logic.so.template.GeneralUpdateSO;
 import com.dostojic.climbers.repository.RegistrationFeeRepository;
 import com.dostojic.climbers.repository.RegistrationRepository;
 import com.dostojic.climbers.repository.RouteRepository;
@@ -22,7 +21,7 @@ import org.springframework.stereotype.Service;
  * @author Dejan.Ostojic
  */
 @Service
-public class CreateCompetition extends GeneralUpdateSO<Competition, Competition>{
+public class CreateCompetition extends GeneralSO<Competition, Competition> {
 
     private final CompetitionRepository competitionRepository;
     private final RouteRepository routeRepository;
