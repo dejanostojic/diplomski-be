@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * @author Dejan.Ostojic
  */
 @Service
-public class FindAdmin extends GeneralSO<Integer, Admin> {
+public class FindAdmin extends GeneralSO<Long, Admin> {
 
     private final AdminRepository adminRepository;
     
@@ -26,7 +26,7 @@ public class FindAdmin extends GeneralSO<Integer, Admin> {
 
 
     @Override
-    protected Admin executeOperation(Integer id)  {
+    protected Admin executeOperation(Long id)  {
         return adminRepository.findById(id);
     }
 

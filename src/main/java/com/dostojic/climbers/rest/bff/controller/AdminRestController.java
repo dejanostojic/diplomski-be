@@ -72,12 +72,12 @@ public class AdminRestController {
 
   @DeleteMapping("/{id}")
   @Loggable
-  public void delete(@PathVariable Integer id) {
+  public void delete(@PathVariable Long id) {
     deleteAdmin.execute(id);
   }
 
   @GetMapping("/{id}")
-  public Admin find(@PathVariable Integer id) {
+  public Admin find(@PathVariable Long id) {
     return findAdmin.execute(id);
   }
 
