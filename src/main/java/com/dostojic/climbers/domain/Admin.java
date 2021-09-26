@@ -5,6 +5,7 @@
  */
 package com.dostojic.climbers.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,18 +17,19 @@ import java.util.Objects;
  *
  * @author planina
  */
-public class User implements Serializable, UserDetails {
+public class Admin implements Serializable, UserDetails {
     private Long id;
     private String firstName;
     private String lastName;
     private String username;
+    @JsonIgnore
     private String password;
     private boolean enabled = true;
 
-    public User() {
+    public Admin() {
     }
 
-    public User(Long id, String firstName, String lastName, String username, String password) {
+    public Admin(Long id, String firstName, String lastName, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -105,7 +107,7 @@ public class User implements Serializable, UserDetails {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
+        final Admin other = (Admin) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

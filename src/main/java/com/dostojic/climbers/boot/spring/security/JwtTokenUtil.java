@@ -1,7 +1,7 @@
 package com.dostojic.climbers.boot.spring.security;
 
 
-import com.dostojic.climbers.domain.User;
+import com.dostojic.climbers.domain.Admin;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -12,7 +12,6 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 //import org.slf4j.Logger;
 //import org.slf4j.event.Level;
-import java.util.Base64;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -28,13 +27,13 @@ public class JwtTokenUtil {
     private final String jwtIssuer = "diplomski.x3m.link";
 
 
-    public String generateAccessToken(User user) {
+    public String generateAccessToken(Admin admin) {
         return "Bearer " + Jwts.builder()
-                .setSubject(format("%s,%s", user.getId(), user.getUsername()))
+                .setSubject(format("%s,%s", admin.getId(), admin.getUsername()))
                 .setIssuer(jwtIssuer)
-                .claim("userId", user.getId())
-                .claim("firstName", user.getFirstName())
-                .claim("lastName", user.getLastName())
+                .claim("userId", admin.getId())
+                .claim("firstName", admin.getFirstName())
+                .claim("lastName", admin.getLastName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 1 week
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

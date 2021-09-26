@@ -1,8 +1,14 @@
 package com.dostojic.climbers.rest.bff.controller;
-
+import com.dostojic.climbers.domain.Admin;
 import com.dostojic.climbers.domain.Climber;
+import com.dostojic.climbers.domain.valueobject.AdminSearchCriteria;
 import com.dostojic.climbers.domain.valueobject.ClimberSearchCriteria;
 import com.dostojic.climbers.logging.Loggable;
+import com.dostojic.climbers.logic.so.admin.CreateAdmin;
+import com.dostojic.climbers.logic.so.admin.DeleteAdmin;
+import com.dostojic.climbers.logic.so.admin.FindAdmin;
+import com.dostojic.climbers.logic.so.admin.SearchAdmins;
+import com.dostojic.climbers.logic.so.admin.UpdateAdmin;
 import com.dostojic.climbers.logic.so.climber.CreateClimber;
 import com.dostojic.climbers.logic.so.climber.DeleteClimber;
 import com.dostojic.climbers.logic.so.climber.FindClimber;
@@ -24,53 +30,55 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("api/climbers")
-public class ClimberRestController {
+@RequestMapping("api/admins")
+public class AdminRestController {
 
   @Autowired
-  private CreateClimber createClimber;
+  private CreateAdmin createAdmin;
 
   @Autowired
-  private SearchClimbers searchClimbers;
+  private SearchAdmins searchAdmins;
 
   @Autowired
-  private UpdateClimber updateClimber;
+  private UpdateAdmin updateAdmin;
 
   @Autowired
-  private DeleteClimber deleteClimber;
+  private DeleteAdmin deleteAdmin;
 
   @Autowired
-  private FindClimber findClimber;
+  private FindAdmin findAdmin;
+
+
 
   @GetMapping()
   @Loggable
-  public Page<Climber> searchClimbers(ClimberSearchCriteria climberSearchCriteria) {
-    return searchClimbers.execute(climberSearchCriteria);
+  public Page<Admin> searchAdmins(AdminSearchCriteria adminSearchCriteria) {
+    return searchAdmins.execute(adminSearchCriteria);
   }
 
   @PostMapping()
   @Loggable
-  public Climber save(@Valid @RequestBody Climber climber) {
-    return createClimber.execute(climber);
+  public Admin save(@Valid @RequestBody Admin admin) {
+    return createAdmin.execute(admin);
   }
 
   @PutMapping("/{id}")
   @Loggable
-  public Climber update(@PathVariable Integer id, @Valid @RequestBody Climber climber) {
-    climber.setId(id);
-    updateClimber.execute(climber);
-    return climber;
+  public Admin update(@PathVariable Long id, @Valid @RequestBody Admin admin) {
+    admin.setId(id);
+    updateAdmin.execute(admin);
+    return admin;
   }
 
   @DeleteMapping("/{id}")
   @Loggable
   public void delete(@PathVariable Integer id) {
-    deleteClimber.execute(id);
+    deleteAdmin.execute(id);
   }
 
   @GetMapping("/{id}")
-  public Climber find(@PathVariable Integer id) {
-    return findClimber.execute(id);
+  public Admin find(@PathVariable Integer id) {
+    return findAdmin.execute(id);
   }
 
 

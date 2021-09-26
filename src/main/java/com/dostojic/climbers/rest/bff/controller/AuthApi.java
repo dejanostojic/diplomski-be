@@ -1,12 +1,11 @@
 package com.dostojic.climbers.rest.bff.controller;
 
 import com.dostojic.climbers.boot.spring.security.JwtTokenUtil;
-import com.dostojic.climbers.domain.User;
+import com.dostojic.climbers.domain.Admin;
 import com.dostojic.climbers.domain.valueobject.LoginCredentials;
 import com.dostojic.climbers.logic.so.user.CreateUser;
 import com.dostojic.climbers.rest.bff.dto.CreateUserRequest;
 import com.dostojic.climbers.rest.bff.dto.UserDto;
-import com.dostojic.climbers.rest.bff.dto.mapper.CompetitionMapper;
 import com.dostojic.climbers.rest.bff.dto.mapper.UserMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,18 +37,18 @@ public class AuthApi {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody @Valid LoginCredentials request) {
+    public ResponseEntity<Admin> login(@RequestBody @Valid LoginCredentials request) {
         try {
             Authentication authenticate = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
-            User user = (User) authenticate.getPrincipal();
+            Admin admin = (Admin) authenticate.getPrincipal();
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(user))
+                    .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(admin))
                     .header(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, HttpHeaders.AUTHORIZATION)
                     .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.AUTHORIZATION)
-                    .body(user);
+                    .body(admin);
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -57,8 +56,8 @@ public class AuthApi {
 //
     @PostMapping("/register")
     public ResponseEntity<UserDto>  register(@RequestBody @Valid CreateUserRequest request) {
-        User user = createUser.createUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.INSTANCE.toDto(user));
+        Admin admin = createUser.createUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.INSTANCE.toDto(admin));
     }
 
 }

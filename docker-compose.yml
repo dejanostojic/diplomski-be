@@ -11,7 +11,7 @@ services:
            - MYSQL_PASSWORD=Welcome123
            - MYSQL_ROOT_HOST=%
     healthcheck:
-           test: ["CMD","mysqladmin","ping","-h","localhost"]
+           test: ["CMD","mysqladmin","ping","-h","localhost", "-pWelcome123"]
            timeout: 20s
            retries: 10
   backendserver:

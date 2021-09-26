@@ -1,11 +1,9 @@
 package com.dostojic.climbers.boot.spring.security;
 
 import com.dostojic.climbers.exception.EntityNotFoundException;
-import com.dostojic.climbers.repository.UserRepository;
-import org.slf4j.Logger;
+import com.dostojic.climbers.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,9 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,7 +29,7 @@ import static java.lang.String.format;
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserRepository userRepo;
+    private final AdminRepository userRepo;
     private final JwtTokenFilter jwtTokenFilter;
 
 //    @Value("${springdoc.api-docs.path}")
@@ -43,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("/v3/api-docs")
     private String swaggerPath;
 
-    public SecurityConfig(UserRepository userRepo,
+    public SecurityConfig(AdminRepository userRepo,
                           JwtTokenFilter jwtTokenFilter) {
         super();
 

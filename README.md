@@ -25,7 +25,7 @@ In order to change db setting use following options:
 ## Swagger ui
 http://diplomski.x3m.link:8081/swagger-ui.html (or localhost if you run locally)
 
-## Default user / pass: student / student
+## Default admin / pass: student / student
 
 ##  Documentation
 Documentation for the project can be found [here](https://fonbgacrs-my.sharepoint.com/:w:/g/personal/do20090246_student_fon_bg_ac_rs/EYqGcUJZDwpLm5SBVUwCRJwBro4hG2Oj4lpAxwkJQUf4hw?e=laQtoR)

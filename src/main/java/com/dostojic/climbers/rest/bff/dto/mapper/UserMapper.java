@@ -5,8 +5,8 @@
  */
 package com.dostojic.climbers.rest.bff.dto.mapper;
 
+import com.dostojic.climbers.domain.Admin;
 import com.dostojic.climbers.rest.bff.dto.UserDto;
-import com.dostojic.climbers.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -19,5 +19,5 @@ public interface UserMapper {
 
     public static UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    UserDto toDto(User user);
+    UserDto toDto(Admin admin);
 }

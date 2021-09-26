@@ -1,10 +1,8 @@
 package com.dostojic.climbers.boot.spring.security;
 
-import com.dostojic.climbers.domain.User;
-import com.dostojic.climbers.repository.UserRepository;
+import com.dostojic.climbers.repository.AdminRepository;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -16,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 
 import static java.util.Optional.ofNullable;
@@ -26,9 +23,9 @@ import static org.springframework.util.StringUtils.isEmpty;
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final JwtTokenUtil jwtTokenUtil;
-    private final UserRepository userRepo;
+    private final AdminRepository userRepo;
 
-    public JwtTokenFilter(JwtTokenUtil jwtTokenUtil, UserRepository userRepo) {
+    public JwtTokenFilter(JwtTokenUtil jwtTokenUtil, AdminRepository userRepo) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.userRepo = userRepo;
     }

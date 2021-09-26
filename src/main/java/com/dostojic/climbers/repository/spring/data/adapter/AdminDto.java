@@ -13,8 +13,8 @@ import javax.persistence.*;
  * @author planina
  */
 @Entity
-@Table(name = "user")
-public class UserDto {
+@Table(name = "admin")
+public class AdminDto {
     
     @Id
     @GeneratedValue(
@@ -33,10 +33,10 @@ public class UserDto {
     @Column(name = "password")
     private String password;
 
-    public UserDto() {
+    public AdminDto() {
     }
 
-    public UserDto(Long id, String firstName, String lastName, String username, String password) {
+    public AdminDto(Long id, String firstName, String lastName, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

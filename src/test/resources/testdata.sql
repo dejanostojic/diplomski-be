@@ -1,1 +1,1 @@
-INSERT INTO `user` VALUES (1,'a1','a1','admin1','admin1'),(2,'a2','a2','admin2','admin2'),(3,'first','admin','admin','admin');
+INSERT INTO `admin` VALUES (1,'a1','a1','admin1','admin1'),(2,'a2','a2','admin2','admin2'),(3,'first','admin','admin','admin');

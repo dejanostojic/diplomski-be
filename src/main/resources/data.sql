@@ -31,5 +31,5 @@ INSERT INTO `registration_fee` (competition_id,ord,`name`,amount, start_date, en
 
 
 
-INSERT INTO `user` () VALUES (1,'student','fon','student','$2a$10$9sjlOz/YcJ9Uk88CC8YGzuM0RFDY8Rptwx9jz3k2OL9ZPJYyk8VeW');
+INSERT INTO `admin` () VALUES (1,'student','fon','student','$2a$10$9sjlOz/YcJ9Uk88CC8YGzuM0RFDY8Rptwx9jz3k2OL9ZPJYyk8VeW');
 
