@@ -11,6 +11,7 @@ import com.dostojic.climbers.logic.so.template.GeneralSO;
 import com.dostojic.climbers.repository.AdminRepository;
 import com.dostojic.climbers.rest.bff.config.ClimberException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,10 +23,13 @@ public class UpdateAdmin extends GeneralSO<Admin, Boolean> {
 
     private final AdminRepository adminRepository;
     private final AdminValidator adminValidator;
+    private PasswordEncoder passwordEncoder;
 
-    public UpdateAdmin(AdminRepository AdminRepository, AdminValidator adminValidator) {
+
+    public UpdateAdmin(AdminRepository AdminRepository, AdminValidator adminValidator, PasswordEncoder passwordEncoder) {
         this.adminRepository = AdminRepository;
         this.adminValidator = adminValidator;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -38,6 +42,12 @@ public class UpdateAdmin extends GeneralSO<Admin, Boolean> {
         Admin existing = adminRepository.findById(admin.getId());
         if (existing == null){
             throw new ClimberException(HttpStatus.BAD_REQUEST, "Admin not found");
+        }
+
+        if (admin.getPassword() != null && !admin.getPassword().isEmpty()){
+            admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        } else {
+            admin.setPassword(existing.getPassword());
         }
 
         System.out.println("DEBUG: Updating admin: " + admin);

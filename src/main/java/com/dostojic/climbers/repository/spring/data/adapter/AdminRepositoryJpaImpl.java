@@ -120,12 +120,17 @@ public class AdminRepositoryJpaImpl implements AdminRepository {
         System.out.println("Got pred new ");
         if (searchCriteria.getFirstName() != null && !searchCriteria.getFirstName().isEmpty()) {
             System.out.println("aaaaa");
-            bb.and(QAdminDto.adminDto.firstName.startsWithIgnoreCase(searchCriteria.getFirstName()));
+            bb.and(QAdminDto.adminDto.firstName.containsIgnoreCase(searchCriteria.getFirstName()));
             System.out.println("set it now");
         }
         if (searchCriteria.getLastName() != null && !searchCriteria.getLastName().isEmpty()) {
             System.out.println("last name!!!");
-            bb.and(QAdminDto.adminDto.lastName.startsWithIgnoreCase(searchCriteria.getLastName()));
+            bb.and(QAdminDto.adminDto.lastName.containsIgnoreCase(searchCriteria.getLastName()));
+            System.out.println("gout it last name");
+        }
+        if (searchCriteria.getUsername() != null && !searchCriteria.getUsername().isEmpty()) {
+            System.out.println("last name!!!");
+            bb.and(QAdminDto.adminDto.username.containsIgnoreCase(searchCriteria.getUsername()));
             System.out.println("gout it last name");
         }
 

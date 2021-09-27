@@ -7,6 +7,7 @@ public class AdminSearchCriteria {
 
   private String firstName;
   private String lastName;
+  private String username;
 
 
   // todo export to separate value object
@@ -36,6 +37,14 @@ public class AdminSearchCriteria {
 
   public void setLastName(String lastName) {
     this.lastName = lastName;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public int getPageNumber() {

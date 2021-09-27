@@ -59,7 +59,10 @@ public class AdminRestController {
   @PostMapping()
   @Loggable
   public Admin save(@Valid @RequestBody Admin admin) {
-    return createAdmin.execute(admin);
+
+    Admin ret = createAdmin.execute(admin);
+    ret.setPassword(null);
+    return ret;
   }
 
   @PutMapping("/{id}")
@@ -67,6 +70,7 @@ public class AdminRestController {
   public Admin update(@PathVariable Long id, @Valid @RequestBody Admin admin) {
     admin.setId(id);
     updateAdmin.execute(admin);
+    admin.setPassword(null);
     return admin;
   }
 
@@ -78,7 +82,9 @@ public class AdminRestController {
 
   @GetMapping("/{id}")
   public Admin find(@PathVariable Long id) {
-    return findAdmin.execute(id);
+    Admin ret = findAdmin.execute(id);
+    ret.setPassword(null);
+    return ret;
   }
 
 

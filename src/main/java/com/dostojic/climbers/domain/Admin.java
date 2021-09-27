@@ -22,7 +22,7 @@ public class Admin implements Serializable, UserDetails {
     private String firstName;
     private String lastName;
     private String username;
-    @JsonIgnore
+//    @JsonIgnore
     private String password;
     private boolean enabled = true;
 
